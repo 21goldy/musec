@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:musec/MusicPlayer/music_player_page.dart';
 import 'package:musec/WelcomePage/welcome_page.dart';
 
 void main() {
@@ -17,7 +18,7 @@ class _MusecAppState extends State<MusecApp> {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: WelcomePage(),
+      home: MusicPlayerPage(),
     );
   }
 }
