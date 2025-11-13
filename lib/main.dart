@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:musec/MusicPlayer/music_player_page.dart';
-import 'package:musec/WelcomePage/welcome_page.dart';
+import 'package:musec/random_songs.dart';
 
 void main() {
   runApp(const MusecApp());
@@ -18,7 +17,7 @@ class _MusecAppState extends State<MusecApp> {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: MusicPlayerPage(),
+      home: RandomSongsPage(),
     );
   }
 }

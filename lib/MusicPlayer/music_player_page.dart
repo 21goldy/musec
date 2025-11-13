@@ -23,14 +23,6 @@ class _MusicPlayerPageState extends State<MusicPlayerPage> {
         child: SafeArea(
           child: Column(
             children: [
-              ElevatedButton(
-                onPressed: () async {
-                await player.setUrl(           // Load a URL
-                    'http://weirdbox-g3-3500:4533/rest/getSong?id=Q38K8J0TK1QeMVSYh8V79n&u=weirdbox&p=@2314&v=1.16.1&c=myapp');
-                player.play();
-                print('clicked!');
-              }, child:
-              Text('play'),),
               SizedBox(height: 20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
