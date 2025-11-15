@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:musec/random_songs.dart';
+import 'package:musec/chat_play.dart';
 
 void main() {
   runApp(const MusecApp());
@@ -17,7 +17,7 @@ class _MusecAppState extends State<MusecApp> {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: RandomSongsPage(),
+      home: ChatPlayPage(),
     );
   }
 }
