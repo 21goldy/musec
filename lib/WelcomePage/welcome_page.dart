@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:musec/FavouritesPage/favourites_page.dart';
 import 'package:musec/HomePage/home_page.dart';
 
 class WelcomePage extends StatefulWidget {
@@ -14,8 +13,8 @@ class _WelcomePageState extends State<WelcomePage> {
 
     final List<Widget> _screens = [
       HomePage(),
-      FavouritesPage(),
       Center(child: Text("Favourite Page")),
+      Center(child: Text("Drop Rooms")),
       Center(child: Text("Profile Page")),
     ];
 
