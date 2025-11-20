@@ -1,23 +1,39 @@
 import 'package:flutter/material.dart';
-import 'package:musec/WelcomePage/welcome_page.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'SignIn/sign_in.dart';
+import 'theme_provider.dart';
 
 void main() {
-  runApp(const MusecApp());
+  runApp(const ProviderScope(child: MusecApp()));
 }
 
-class MusecApp extends StatefulWidget {
+class MusecApp extends ConsumerWidget {
   const MusecApp({super.key});
 
   @override
-  State<MusecApp> createState() => _MusecAppState();
-}
+  Widget build(BuildContext context, WidgetRef ref) {
+    final themeMode = ref.watch(themeProvider);
 
-class _MusecAppState extends State<MusecApp> {
-  @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: WelcomePage(),
+      themeMode: themeMode,
+      theme: ThemeData(
+        brightness: Brightness.light,
+        scaffoldBackgroundColor: Colors.white,
+        primaryColor: Colors.black,
+        inputDecorationTheme: const InputDecorationTheme(
+          hintStyle: TextStyle(color: Colors.black38),
+        ),
+      ),
+      darkTheme: ThemeData(
+        brightness: Brightness.dark,
+        scaffoldBackgroundColor: Colors.black,
+        primaryColor: Colors.white,
+        inputDecorationTheme: const InputDecorationTheme(
+          hintStyle: TextStyle(color: Colors.white24),
+        ),
+      ),
+      home: const SignIn(),
     );
   }
 }

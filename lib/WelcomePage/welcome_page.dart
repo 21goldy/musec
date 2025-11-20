@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:musec/HomePage/home_page.dart';
 
 class WelcomePage extends StatefulWidget {
   const WelcomePage({super.key});
@@ -8,42 +9,60 @@ class WelcomePage extends StatefulWidget {
 }
 
 class _WelcomePageState extends State<WelcomePage> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        leading: Icon(
-            size: 25,
-            color: Colors.black54,
-            Icons.arrow_back_ios_rounded),
-        actions: [
-          Icon(
-              size: 25,
-              color: Colors.black54,
-              Icons.search_rounded),
-        ],
-      ),
-      body: SafeArea(
-        child: Column(
-          children: [
-            Row(
-              children: [
-                Container(
-                  width: 100,
-                  height: 100,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(30),
-                    color: Colors.grey.withOpacity(0.5),
-                  ),
-                  child: Icon(color: Colors.white, Icons.skip_previous_rounded),
-                ),
-              ],
-            ),
-          ],
+    int _currentIndex = 0;
+
+    final List<Widget> _screens = [
+      HomePage(),
+      Center(child: Text("Favourite Page")),
+      Center(child: Text("Drop Rooms")),
+      Center(child: Text("Profile Page")),
+    ];
+
+    @override
+    Widget build(BuildContext context) {
+      return Scaffold(
+        backgroundColor: Colors.grey.shade100,
+        body: _screens[_currentIndex],
+        bottomNavigationBar: ClipRRect(
+          borderRadius: const BorderRadius.only(
+            topLeft: Radius.circular(40),
+            topRight: Radius.circular(40),
+          ),
+          child: BottomNavigationBar(
+            currentIndex: _currentIndex,
+            showSelectedLabels: false,
+            showUnselectedLabels: false,
+            selectedItemColor: Colors.black,
+            unselectedItemColor: Colors.grey,
+            elevation: 2,
+
+            onTap: (index) {
+              setState(() {
+                _currentIndex = index;
+              });
+            },
+
+            items: const [
+              BottomNavigationBarItem(
+                backgroundColor: Colors.white,
+                icon: Icon(Icons.home),
+                label: "Home",
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.favorite_rounded),
+                label: "Favourites",
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.water_drop),
+                label: "Drop Room",
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.settings),
+                label: "Profile",
+              ),
+            ],
+          ),
         ),
-      ),
-    );
-  }
+      );
+    }
 }
