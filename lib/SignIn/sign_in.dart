@@ -1,67 +1,63 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:musec/CustomWidgets/custom_form_field.dart';
 
-class SignIn extends StatelessWidget {
+class SignIn extends ConsumerStatefulWidget {
   const SignIn({super.key});
 
   @override
+  ConsumerState<SignIn> createState() => _SignInState();
+}
+
+class _SignInState extends ConsumerState<SignIn> {
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final email = TextEditingController();
-    final password = TextEditingController();
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(30),
-        child: SafeArea(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                'Sign In',
-                style: TextStyle(
-                  fontSize: 30,
-                  fontWeight: FontWeight.w600,
-                  color: isDark ? Colors.white : Colors.black,
+      body: Stack(
+        fit: StackFit.expand,
+        children: [
+          Image.asset("assets/gif/Musec.gif", fit: BoxFit.cover),
+
+          Container(color: Colors.black.withOpacity(0.5)),
+
+          SafeArea(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  "SIGN IN",
+                  style: GoogleFonts.titanOne(letterSpacing: 1, fontSize: 50, color: Colors.white),
                 ),
-              ),
-
-              const SizedBox(height: 50),
-
-              CustomFormField(
-                hintText: 'Enter Email Address',
-                iconData: Icons.email_outlined,
-                controller: email,
-              ),
-
-              CustomFormField(
-                hintText: 'Enter Password',
-                iconData: Icons.lock_outline_rounded,
-                controller: password,
-              ),
-
-              const SizedBox(height: 80),
-
-              ElevatedButton(
-                onPressed: () {},
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: isDark ? Colors.white : Colors.black,
-                  foregroundColor: isDark ? Colors.black : Colors.white,
-                  padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 50),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
+                SizedBox(height: 80),
+                CustomFormField(
+                  hintText: "Email Address",
+                  controller: emailController,
                 ),
-                child: const Text(
-                  'Sign In',
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                CustomFormField(
+                  hintText: "Password",
+                  controller: passwordController,
                 ),
-              ),
+                SizedBox(height: 250),
 
-              const SizedBox(height: 50),
-            ],
+                Text(
+                  "Forgot Password?",
+                  style: GoogleFonts.poppins(letterSpacing: 1, fontSize: 15, color: Colors.white70),
+                ),
+              ],
+            ),
           ),
-        ),
+        ],
       ),
     );
   }

@@ -36,6 +36,7 @@ dependencies:
   cupertino_icons: ^1.0.8
   just_audio: ^0.10.5
   flutter_svg: ^2.2.2
+  google_fonts: ^6.1.0
   flutter_riverpod: ^3.0.3
   shared_preferences: ^2.5.3
 
@@ -57,6 +58,8 @@ dev_dependencies:
 flutter:
   assets:
     - assets/icons/
+    - assets/svgs/
+    - assets/gif/
 
 
   # The following line ensures that the Material Icons font is
