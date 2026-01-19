@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../CustomWidgets/svg_container.dart';
-
 class DropRoomPage extends StatefulWidget {
   const DropRoomPage({super.key});
 

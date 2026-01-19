@@ -4,7 +4,8 @@ import 'package:http/http.dart' as http;
 import 'package:just_audio/just_audio.dart';
 
 class RandomSongsPage extends StatefulWidget {
-  const RandomSongsPage({super.key});
+  final String title;
+  const RandomSongsPage({super.key, required this.title});
 
   @override
   State<RandomSongsPage> createState() => _RandomSongsPageState();
@@ -57,7 +58,10 @@ class _RandomSongsPageState extends State<RandomSongsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Random Songs')),
+      backgroundColor: Colors.black,
+      appBar: AppBar(leading: InkWell(onTap: (){
+        Navigator.pop(context);
+      }, child: Icon(Icons.arrow_back_ios_new, color: Colors.white,)), title: Text(widget.title, style: TextStyle(color: Colors.white),), backgroundColor: Colors.black,),
       body: FutureBuilder<List<Song>>(
         future: _futureSongs,
         builder: (context, snapshot) {
@@ -67,6 +71,7 @@ class _RandomSongsPageState extends State<RandomSongsPage> {
             return Center(child: Text('Error: ${snapshot.error}'));
           } else {
             final songs = snapshot.data!;
+            print(songs.length);
             return ListView.builder(
               itemCount: songs.length,
               itemBuilder: (context, index) {
@@ -90,13 +95,13 @@ class _RandomSongsPageState extends State<RandomSongsPage> {
                       }
                     },
                     child: CircleAvatar(
-                      backgroundColor: Colors.black87,
+                      backgroundColor: Colors.white,
                       child: isCurrentSongPlaying
-                          ? Icon(Icons.pause, color: Colors.white)
-                          : Icon(Icons.play_arrow_rounded, color: Colors.white),
+                          ? Icon(Icons.pause, color: Colors.black)
+                          : Icon(Icons.play_arrow_rounded, color: Colors.black),
                     ),
                   ),
-                  title: Text(song.title),
+                  title: Text(song.title, style: TextStyle(color: Colors.white),),
                   subtitle: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -116,9 +121,9 @@ class _RandomSongsPageState extends State<RandomSongsPage> {
                                 trackHeight: 2.0, // thinner progress line
                                 thumbShape: const RoundSliderThumbShape(enabledThumbRadius: 5.0), // smaller thumb
                                 overlayShape: const RoundSliderOverlayShape(overlayRadius: 8.0), // smaller touch area
-                                activeTrackColor: Colors.black87,
-                                inactiveTrackColor: Colors.grey.shade300,
-                                thumbColor: Colors.black87,
+                                activeTrackColor: Colors.white,
+                                inactiveTrackColor: Colors.grey,
+                                thumbColor: Colors.white,
                               ),
                               child: Slider(
                                 min: 0,

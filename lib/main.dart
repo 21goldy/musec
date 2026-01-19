@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:musec/SignIn/sign_in.dart';
+import 'package:musec/WelcomePage/welcome_page.dart';
 
 
 void main() {
@@ -15,7 +15,7 @@ class MusecApp extends ConsumerWidget {
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: SignIn(),
+      home: WelcomePage(),
     );
   }
 }
