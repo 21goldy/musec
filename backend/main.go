@@ -1,34 +1,22 @@
 package main
 
 import (
-  "context"
-  "fmt"
-
-  "go.mongodb.org/mongo-driver/v2/mongo"
-  "go.mongodb.org/mongo-driver/v2/mongo/options"
-  "go.mongodb.org/mongo-driver/v2/mongo/readpref"
+	"context"
+	"log"
+	"github.com/supabase-community/supabase-go"
 )
 
-func main() {
-  // Use the SetServerAPIOptions() method to set the version of the Stable API on the client
-  serverAPI := options.ServerAPI(options.ServerAPIVersion1)
-  opts := options.Client().ApplyURI("mongodb+srv://musec_admin:HWX8BURc4gxiL31V@cluster0.sizxb8k.mongodb.net/?appName=Cluster0").SetServerAPIOptions(serverAPI)
 
-  // Create a new client and connect to the server
-  client, err := mongo.Connect(opts)
-  if err != nil {
-    panic(err)
-  }
+func main () {
+	var err error
 
-  defer func() {
-    if err = client.Disconnect(context.TODO()); err != nil {
-      panic(err)
-    }
-  }()
+	string API_URL = "https://vkpmvhjqkpvwjsufiafc.supabase.co"
+	string API_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZrcG12aGpxa3B2d2pzdWZpYWZjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjQ0MDcyNjUsImV4cCI6MjA3OTk4MzI2NX0.UzUlpIlfushxBUMjhVwIZ2blJauITrc-KKlWWC3mN4M"
 
-  // Send a ping to confirm a successful connection
-  if err := client.Ping(context.TODO(), readpref.Primary()); err != nil {
-    panic(err)
-  }
-  fmt.Println("Pinged your deployment. You successfully connected to MongoDB!")
+    client, err := supabase.NewClient(API_URL, API_KEY, &supabase.ClientOptions{})
+     if err != nil {
+      fmt.Println("Failed to initalize the client: ", err)
+     }
+
+	log.Println("✅ Connected to Supabase Postgres")
 }
