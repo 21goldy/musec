@@ -5,6 +5,8 @@ import 'package:musec/DropRoomPage/drop_room_page.dart';
 import 'package:musec/HomePage/home_page.dart';
 import 'package:musec/SearchPage/search_page.dart';
 
+import '../AudioPlayer/mini_player.dart';
+
 class WelcomePage extends StatefulWidget {
   const WelcomePage({super.key});
 
@@ -24,30 +26,37 @@ class _WelcomePageState extends State<WelcomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.black,
-      body: _screens[_currentIndex],
-      bottomNavigationBar: Padding(
-        padding: const EdgeInsets.only(left: 25, right: 25, bottom: 60),
-        child: ClipRRect(
-          borderRadius: const BorderRadius.only(
-            topLeft: Radius.elliptical(30, 50),
-            bottomLeft: Radius.elliptical(70, 40),
-            bottomRight: Radius.elliptical(20, 50),
-            topRight: Radius.elliptical(50, 20),
-          ),
-          child: Container(
-            height: 80,
-            color: Colors.grey.shade800,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                _navIcon("assets/svgs/thin_home.svg", 0, 45),
-                _navIcon("assets/svgs/thin_search.svg", 1, 50),
-                _navIcon("assets/svgs/thin_room.svg", 2, 40),
-                _navIcon("assets/svgs/thin_account.svg", 3, 45),
-              ],
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: Colors.black,
+        body: Stack(
+          children: [
+            _screens[_currentIndex],
+            const Align(alignment: Alignment.topCenter, child: MiniPlayer()),
+          ],
+        ),
+        bottomNavigationBar: Padding(
+          padding: const EdgeInsets.only(left: 25, right: 25, bottom: 80),
+          child: ClipRRect(
+            borderRadius: const BorderRadius.only(
+              topLeft: Radius.elliptical(30, 50),
+              bottomLeft: Radius.elliptical(70, 40),
+              bottomRight: Radius.elliptical(20, 50),
+              topRight: Radius.elliptical(50, 20),
+            ),
+            child: Container(
+              height: 80,
+              color: Colors.grey.shade800,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  _navIcon("assets/svgs/thin_home.svg", 0, 45),
+                  _navIcon("assets/svgs/thin_search.svg", 1, 50),
+                  _navIcon("assets/svgs/thin_room.svg", 2, 40),
+                  _navIcon("assets/svgs/thin_account.svg", 3, 45),
+                ],
+              ),
             ),
           ),
         ),

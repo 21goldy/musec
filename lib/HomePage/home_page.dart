@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:musec/CustomWidgets/svg_container.dart';
 import 'package:musec/CustomWidgets/playlist_grid.dart';
 
 class HomePage extends StatefulWidget {
@@ -18,7 +17,7 @@ class _HomePageState extends State<HomePage> {
       body: SafeArea(
         child: ListView(
           children: [
-            const SizedBox(height: 20),
+            const SizedBox(height: 30),
 
             Padding(
               padding: const EdgeInsets.all(20.0),
@@ -49,7 +48,7 @@ class _HomePageState extends State<HomePage> {
                           "genre",
                           style: GoogleFonts.raleway(
                             letterSpacing: 1,
-                            fontSize: 17,
+                            fontSize: 18,
                             fontWeight: FontWeight.w500,
                             color: Colors.black,
                           ),
@@ -60,7 +59,7 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 40),
             const PlaylistGrid(),
           ],
         ),

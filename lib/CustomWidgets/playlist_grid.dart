@@ -43,11 +43,6 @@ class _PlaylistGridState extends State<PlaylistGrid> {
     final playlists =
     playlistsJson.map((e) => Playlist.fromJson(e)).toList();
 
-    pastelColors = List.generate(
-      playlists.length,
-          (_) => PastelColor.generate(),
-    );
-
     return playlists;
   }
 
@@ -57,7 +52,7 @@ class _PlaylistGridState extends State<PlaylistGrid> {
       future: _playlistFuture,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(child: CircularProgressIndicator());
+          return const Center(child: CircularProgressIndicator(color: Colors.grey,));
         }
 
         if (snapshot.hasError) {
@@ -69,7 +64,7 @@ class _PlaylistGridState extends State<PlaylistGrid> {
         final List<GridItem> gridItems = [
           GridItem(
             id: 'liked',
-            title: 'Liked  Songs',
+            title: 'Liked Songs',
             isDotted: true,
             color: Colors.white,
           ),
@@ -77,16 +72,21 @@ class _PlaylistGridState extends State<PlaylistGrid> {
             id: 'daily10',
             title: 'Daily 10 for You',
             isDotted: false,
-            color: PastelColor.generate(),
+            color: GridTileColors.byIndex(0),
           ),
 
-          ...playlists.map(
-                (p) => GridItem(
-              id: p.id,
-              title: p.name,
-              isDotted: false,
-                  color: PastelColor.fromSeed(p.id),
-                ),
+          ...playlists.asMap().entries.map(
+                (entry) {
+              final index = entry.key + 1; // offset after fixed items
+              final p = entry.value;
+
+              return GridItem(
+                id: p.id,
+                title: p.name,
+                isDotted: false,
+                color: GridTileColors.byIndex(index),
+              );
+            },
           ),
         ];
 
@@ -106,10 +106,8 @@ class _PlaylistGridState extends State<PlaylistGrid> {
 
             return SvgContainer(
               isDottedContainer: item.id == 'liked',
-              color: item.id == 'liked'
-                  ? Colors.white
-                  : PastelColor.fromSeed(item.id),
-              containerText: item.title,
+              color: item.color,
+            containerText: item.title,
               onTap: () {
                 if (item.id == 'liked') {
                   Navigator.push(
