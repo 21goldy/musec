@@ -36,7 +36,7 @@ class _WelcomePageState extends State<WelcomePage> {
           ],
         ),
         bottomNavigationBar: Padding(
-          padding: const EdgeInsets.only(left: 25, right: 25, bottom: 80),
+          padding: const EdgeInsets.only(left: 25, right: 25, bottom: 60),
           child: ClipRRect(
             borderRadius: const BorderRadius.only(
               topLeft: Radius.elliptical(30, 50),

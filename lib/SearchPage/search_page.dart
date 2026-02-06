@@ -3,19 +3,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
-import 'package:musec/UniversalComponents/ClassModels.dart';
-import '../UniversalComponents/Widgets.dart';
+import 'package:musec/UniversalComponents/class_models.dart';
+import '../UniversalComponents/account_control.dart';
+import '../UniversalComponents/widgets.dart';
 import 'package:musec/AudioPlayer/audio_player_provider.dart';
 
-class SearchPage extends StatefulWidget {
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+class SearchPage extends ConsumerStatefulWidget {
   const SearchPage({super.key});
 
   @override
-  State<SearchPage> createState() => _SearchPageState();
+  ConsumerState<SearchPage> createState() => _SearchPageState();
 }
 
-class _SearchPageState extends State<SearchPage> {
-  TextEditingController searchbarController = TextEditingController();
+class _SearchPageState extends ConsumerState<SearchPage> {
+  final TextEditingController searchbarController = TextEditingController();
 
   List<Album> albums = [];
   List<Song> songs = [];
@@ -23,6 +26,8 @@ class _SearchPageState extends State<SearchPage> {
 
   @override
   Widget build(BuildContext context) {
+    final state = ref.watch(audioPlayerProvider);
+
     List<Album> parseAlbums(Map<String, dynamic> data) {
       final albums =
           data['subsonic-response']['searchResult2']['album'] as List?;
@@ -39,8 +44,9 @@ class _SearchPageState extends State<SearchPage> {
 
       setState(() => isLoading = true);
 
-      final uri = Uri.parse(
-        'http://100.92.42.45:4533/rest/search2?&query=${searchbarController.text}&u=weirdbox&p=@2314&v=1.16.1&c=myapp&f=json',
+      final uri = SubsonicApi.buildUri(
+        'search2',
+        extra: {'query': searchbarController.text}
       );
 
       final http.Response res = await http.get(uri);
@@ -65,7 +71,12 @@ class _SearchPageState extends State<SearchPage> {
       body: SafeArea(
         child: Column(
           children: [
-            SizedBox(height: 50),
+            AnimatedSize(
+              duration: const Duration(milliseconds: 250),
+              child: state.currentSongId != null
+                  ? const SizedBox(height: 90)
+                  : const SizedBox(height: 50,),
+            ),
             Padding(
               padding: const EdgeInsets.only(left: 50, right: 50, bottom: 10),
               child: TextFormField(
@@ -163,8 +174,7 @@ class _SearchPageState extends State<SearchPage> {
 
   Widget albumTile(Album album) {
     return ListTile(
-      leading: Image.network(
-        "http://100.92.42.45:4533/rest/getCoverArt?id=${album.coverArt}&u=weirdbox&p=@2314&v=1.16.1&c=myapp",
+      leading: Image.network(album.coverUrl,
         width: 45,
         fit: BoxFit.cover,
       ),
@@ -181,8 +191,7 @@ class _SearchPageState extends State<SearchPage> {
 
   Widget songTile(Song song) {
     return ListTile(
-      leading: Image.network(
-          "http://100.92.42.45:4533/rest/getCoverArt?id=${song.coverArt}&u=weirdbox&p=@2314&v=1.16.1&c=myapp"),
+      leading: Image.network(song.coverUrl),
       title: Text(
         song.title.replaceAll(" - PagalNew", ""),
         style: const TextStyle(color: Colors.white),

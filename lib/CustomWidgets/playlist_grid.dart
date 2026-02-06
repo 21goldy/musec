@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
+import 'package:musec/UniversalComponents/account_control.dart';
 import '../daily_mix.dart';
 import '../liked_songs_page.dart';
 import '../playlist_songs_page.dart';
@@ -26,10 +27,7 @@ class _PlaylistGridState extends State<PlaylistGrid> {
 
   Future<List<Playlist>> fetchPlaylists() async {
     final response = await http.get(
-      Uri.parse(
-        'http://100.92.42.45:4533/rest/getPlaylists'
-            '?u=weirdbox&p=@2314&v=1.16.1&c=myapp&f=json',
-      ),
+      SubsonicApi.buildUri('getPlaylists')
     );
 
     if (response.statusCode != 200) {

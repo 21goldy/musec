@@ -18,7 +18,7 @@ class _DropRoomPageState extends State<DropRoomPage> {
         child: Column(
           children: [
             SizedBox(
-              height: 70,
+              height: 80,
             ),
             Center(
               child: Padding(

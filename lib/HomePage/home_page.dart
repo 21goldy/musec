@@ -1,24 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:musec/CustomWidgets/playlist_grid.dart';
+import 'package:musec/AudioPlayer/audio_player_provider.dart';
 
-class HomePage extends StatefulWidget {
+class HomePage extends ConsumerWidget {
   const HomePage({super.key});
 
-  @override
-  State<HomePage> createState() => _HomePageState();
-}
 
-class _HomePageState extends State<HomePage> {
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final state = ref.watch(audioPlayerProvider);
+
     return Scaffold(
       backgroundColor: Colors.black,
       body: SafeArea(
         child: ListView(
           children: [
-            const SizedBox(height: 30),
-
+            AnimatedSize(
+              duration: const Duration(milliseconds: 250),
+              child: state.currentSongId != null
+                  ? const SizedBox(height: 70)
+                  : const SizedBox(height: 20,),
+            ),
             Padding(
               padding: const EdgeInsets.all(20.0),
               child: Row(
@@ -59,7 +63,7 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
             ),
-            const SizedBox(height: 40),
+            const SizedBox(height: 20),
             const PlaylistGrid(),
           ],
         ),

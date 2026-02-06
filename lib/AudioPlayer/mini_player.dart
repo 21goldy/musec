@@ -8,68 +8,90 @@ class MiniPlayer extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final playerState = ref.watch(audioPlayerProvider);
+    final state = ref.watch(audioPlayerProvider);
+    final notifier = ref.read(audioPlayerProvider.notifier);
+    final isPlaying = state.isPlaying;
 
-    if (playerState.currentSongId == null) {
+
+    if (state.currentSongId == null) {
       return const SizedBox.shrink();
     }
 
     return Container(
       height: 70,
+      width: 395,
       decoration: const BoxDecoration(
         color: Color(0xFF7de7ab),
-        border: Border(
-          top: BorderSide(color: Colors.white12),
+        borderRadius: BorderRadius.only(
+          bottomLeft: Radius.circular(8),
+          bottomRight: Radius.circular(8),
         ),
       ),
       child: Row(
         children: [
-          SizedBox(
-            width: 30,
-          ),
+          const SizedBox(width: 16),
           Expanded(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  playerState.title ?? '',
+                  state.title ?? '',
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: GoogleFonts.raleway(
-                      color: Colors.black, fontSize: 13, fontWeight: FontWeight.w500
+                    color: Colors.black,
+                    fontSize: 13,
+                    fontWeight: FontWeight.w600,
                   ),
                 ),
                 Text(
-                  playerState.artist ?? '',
+                  state.artist ?? '',
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: GoogleFonts.raleway(
-                      color: Colors.black, fontSize: 10, fontWeight: FontWeight.w500
+                    color: Colors.black,
+                    fontSize: 10,
                   ),
                 ),
               ],
             ),
           ),
-          Row(
-            children: [
-              IconButton(onPressed: (){}, icon: Icon(Icons.favorite_outline_rounded, color: Colors.black, size: 18,),),
-              IconButton(onPressed: (){}, icon: Icon(Icons.skip_previous_rounded, color: Colors.black, size: 30,),),
-              IconButton(
-                icon: playerState.isPlaying ? Icon(Icons.pause_circle_filled_rounded, color: Colors.black, size: 42,): Icon(Icons.play_circle_filled_rounded, color: Colors.black, size: 42,),
-                onPressed: (){
-                  final notifier =
-                  ref.read(audioPlayerProvider.notifier);
-
-                  playerState.isPlaying
-                      ? notifier.pause()
-                      : notifier.player.play();
-                },
-              ),
-              IconButton(onPressed: (){}, icon: Icon(Icons.skip_next_rounded, color: Colors.black, size: 30,),),
-              IconButton(onPressed: (){}, icon: Icon(Icons.add_circle_outline_rounded, color: Colors.black, size: 18,),),
-            ],
+          IconButton(
+            onPressed: notifier.hasPrevious ? notifier.skipPrevious : null,
+            icon: const Icon(
+              Icons.skip_previous_rounded,
+              size: 30,
+              color: Colors.black,
+            ),
           ),
+
+          IconButton(
+            icon: Icon(
+              isPlaying
+                  ? Icons.pause_circle_filled_rounded
+                  : Icons.play_circle_filled_rounded,
+              size: 42,
+              color: Colors.black,
+            ),
+            onPressed: () {
+              if (isPlaying) {
+                notifier.pause();
+              } else {
+                notifier.resume();
+              }
+            },
+          ),
+
+          IconButton(
+            onPressed: notifier.hasNext ? notifier.skipNext : null,
+            icon: const Icon(
+              Icons.skip_next_rounded,
+              size: 30,
+              color: Colors.black,
+            ),
+          ),
+        const SizedBox(width: 8),
         ],
       ),
     );
