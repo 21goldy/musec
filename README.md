@@ -340,16 +340,15 @@ Add screenshots of the application to the `screenshots/` directory.
 
 ### Sign Up
 
-![Musec Sign Up Page](<img width="1080" height="1920" alt="Sign Up" src="https://github.com/user-attachments/assets/e839c6dc-1448-403d-aaea-4367a6f8abbb" />)
+![Musec Sign Up Page](https://github.com/user-attachments/assets/e839c6dc-1448-403d-aaea-4367a6f8abbb)
 
 ### Dashboard
 
-![Musec Dashboard](<img width="1080" height="1920" alt="Dashboard" src="https://github.com/user-attachments/assets/6bef45a6-508a-418b-95a5-113b361bee2f" />)
+![Musec Dashboard](https://github.com/user-attachments/assets/6bef45a6-508a-418b-95a5-113b361bee2f)
 
 ### Music Player
 
-![Musec Player](<img width="1080" height="1920" alt="Dashboard with music player" src="https://github.com/user-attachments/assets/21258538-0a9e-4b71-9c10-1f0307ae94d2" />
-)
+![Musec Player](https://github.com/user-attachments/assets/21258538-0a9e-4b71-9c10-1f0307ae94d2)
 
 
 ---
