@@ -336,20 +336,17 @@ dart format .
 
 ## 📸 Screenshots
 
-Add screenshots of the application to the `screenshots/` directory.
-
 ### Sign Up
 
-![Musec Sign Up Page](https://github.com/user-attachments/assets/e839c6dc-1448-403d-aaea-4367a6f8abbb)
+<img src="https://github.com/user-attachments/assets/e839c6dc-1448-403d-aaea-4367a6f8abbb" alt="Musec Sign Up Page" width="280">
 
 ### Dashboard
 
-![Musec Dashboard](https://github.com/user-attachments/assets/6bef45a6-508a-418b-95a5-113b361bee2f)
+<img src="https://github.com/user-attachments/assets/6bef45a6-508a-418b-95a5-113b361bee2f" alt="Musec Dashboard" width="280">
 
 ### Music Player
 
-![Musec Player](https://github.com/user-attachments/assets/21258538-0a9e-4b71-9c10-1f0307ae94d2)
-
+<img src="https://github.com/user-attachments/assets/21258538-0a9e-4b71-9c10-1f0307ae94d2" alt="Musec Music Player" width="280">
 
 ---
 
